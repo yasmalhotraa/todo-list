@@ -1,18 +1,31 @@
 // elements
 const form = document.querySelector("#todoForm");
 const unorderedList = document.querySelector(".task-container");
+const buttons = document.querySelectorAll(".categories-container button");
+const allBtn = document.querySelector("#allBtn");
+const clickSound = new Audio("./click.mp3");
 
 // load tasks from localStorage or initialize empty array
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 console.log(tasks);
 
-// event listeners
+// event listeners and actions
 form.addEventListener("submit", handleFormSubmission);
+allBtn.classList.add("active");
+buttons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    buttons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    clickSound.currentTime = 0;
+    clickSound.play();
+  });
+});
 
 // render on page load
 renderTasks();
 
 // functions
+
 // handle form submission
 function handleFormSubmission(e) {
   e.preventDefault();

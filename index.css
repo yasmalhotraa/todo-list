@@ -17,7 +17,6 @@ body {
       transparent 40%
     ),
     linear-gradient(180deg, #0f0f13, #13131a);
-
   background-size: cover;
   background-position: center;
 }
@@ -55,16 +54,14 @@ h1::after {
   inset: 0;
   margin: auto;
   width: 80%;
+  max-width: 500px;
   height: 500px;
   padding: 20px;
-
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
-
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.25);
-
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.45),
     inset 0 0 0.5px rgba(255, 255, 255, 0.4);
@@ -133,7 +130,7 @@ button[type="submit"]:hover {
   display: none;
   padding: 5px;
   border-radius: 10px;
-  height: 350px;
+  height: 320px;
   overflow-y: scroll;
   scrollbar-width: none;
 }
@@ -231,4 +228,58 @@ li::first-letter {
 
 .delete-btn:hover .delete-img {
   opacity: 1;
+}
+
+/* categories container */
+
+.categories-container {
+  display: flex;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 16px;
+  justify-content: space-around;
+}
+
+/* Category Buttons */
+.categories-container button {
+  flex: 1;
+  margin: 0 6px;
+  padding: 10px 0;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 0 0.5px rgba(255, 255, 255, 0.3);
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    color 0.25s ease;
+}
+
+.categories-container button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.16);
+  color: white;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+}
+
+.categories-container button.active {
+  background: linear-gradient(135deg, #44c4a1, #3aaed8);
+  border: none;
+  color: white;
+
+  box-shadow: 0 10px 30px rgba(68, 196, 161, 0.45);
+}
+
+.categories-container button:active {
+  transform: scale(0.97);
 }
