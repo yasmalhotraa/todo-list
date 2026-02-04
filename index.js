@@ -3,29 +3,38 @@ const form = document.querySelector("#todoForm");
 const unorderedList = document.querySelector(".task-container");
 const buttons = document.querySelectorAll(".categories-container button");
 const allBtn = document.querySelector("#allBtn");
-const clickSound = new Audio("./click.mp3");
+let currentCategory = "all";
 
 // load tasks from localStorage or initialize empty array
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-console.log(tasks);
 
 // event listeners and actions
+// form submit event
 form.addEventListener("submit", handleFormSubmission);
+// setting all category button as default active
 allBtn.classList.add("active");
+// category buttons click event
 buttons.forEach((btn) => {
   btn.addEventListener("click", () => {
     buttons.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
-    clickSound.currentTime = 0;
-    clickSound.play();
+    if (btn.id == "allBtn") {
+      currentCategory = "all";
+      renderTasks(tasks);
+    } else if (btn.id == "activeBtn") {
+      currentCategory = "active";
+      renderTasks(getActive());
+    } else {
+      currentCategory = "completed";
+      renderTasks(getCompleted());
+    }
   });
 });
 
 // render on page load
-renderTasks();
+renderCurrentCategory();
 
 // functions
-
 // handle form submission
 function handleFormSubmission(e) {
   e.preventDefault();
@@ -57,19 +66,34 @@ function saveTasks() {
 }
 
 // render all tasks
-function renderTasks() {
-  unorderedList.innerHTML = "";
 
-  if (tasks.length === 0) {
-    unorderedList.style.display = "none";
+function renderTasks(taskList = tasks) {
+  unorderedList.innerHTML = "";
+  unorderedList.classList.remove("empty");
+
+  if (taskList.length === 0) {
+    unorderedList.innerHTML = `
+  <p>Small steps start here.</p>
+  <p>Add your first task and stay on track.</p>
+  <p>No pressure. Just progress.</p>
+`;
+    unorderedList.classList.add("empty");
     return;
   }
 
-  unorderedList.style.display = "block";
-
-  tasks.forEach((task) => {
+  taskList.forEach((task) => {
     createTaskElement(task);
   });
+}
+
+function renderCurrentCategory() {
+  if (currentCategory === "active") {
+    renderTasks(getActive());
+  } else if (currentCategory === "completed") {
+    renderTasks(getCompleted());
+  } else {
+    renderTasks(tasks);
+  }
 }
 
 // create a task
@@ -93,7 +117,7 @@ function createTaskElement(task) {
   checkbox.addEventListener("click", () => {
     task.completed = !task.completed;
     saveTasks();
-    renderTasks();
+    renderCurrentCategory();
   });
 
   // task text
@@ -103,7 +127,7 @@ function createTaskElement(task) {
   li.addEventListener("click", () => {
     task.completed = !task.completed;
     saveTasks();
-    renderTasks();
+    renderCurrentCategory();
   });
 
   if (task.completed) {
@@ -125,7 +149,7 @@ function createTaskElement(task) {
   deleteBtn.addEventListener("click", () => {
     tasks = tasks.filter((t) => t.id !== task.id);
     saveTasks();
-    renderTasks();
+    renderCurrentCategory();
   });
 
   listContainer.appendChild(checkbox);
@@ -133,4 +157,14 @@ function createTaskElement(task) {
   listContainer.appendChild(deleteBtn);
 
   unorderedList.appendChild(listContainer);
+}
+
+// function to get completed tasks from the tasks array
+function getCompleted() {
+  return tasks.filter((task) => task.completed);
+}
+
+// function to get non completed tasks from the tasks array
+function getActive() {
+  return tasks.filter((task) => !task.completed);
 }

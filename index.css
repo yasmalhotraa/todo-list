@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Mogra&family=Playwrite+NZ+Basic+Guides&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Seymour+One&display=swap");
+
 body {
   background-color: #0f0f13;
   width: 100vw;
@@ -26,6 +28,8 @@ h1 {
   text-align: center;
   font-size: 30px;
   font-weight: 300;
+  /* font-family: "Playwrite NZ Basic Guides", cursive; */
+  font-family: "Anton", sans-serif;
   color: rgba(255, 255, 255, 0.75);
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -120,23 +124,49 @@ button[type="submit"] {
     box-shadow 0.2s ease;
 }
 
-button[type="submit"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(68, 196, 161, 0.6);
-}
-
 /* Task Container */
 .task-container {
-  display: none;
   padding: 5px;
   border-radius: 10px;
-  height: 320px;
+  height: 310px;
   overflow-y: scroll;
   scrollbar-width: none;
 }
 
 .task-container::-webkit-scrollbar {
   display: none;
+}
+
+.task-container.empty {
+  display: flex;
+  height: 280px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-container p {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.task-container p:nth-child(1) {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.task-container p:nth-child(2) {
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.task-container p:nth-child(3) {
+  font-size: 12px;
+  margin-top: 4px;
+  opacity: 0.6;
 }
 
 /* Task Item */
@@ -164,12 +194,6 @@ button[type="submit"]:hover {
     transform 0.25s ease,
     background 0.25s ease,
     box-shadow 0.25s ease;
-}
-
-.list-container:hover {
-  background: rgba(255, 255, 255, 0.18);
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
 /* Task Text */
@@ -221,15 +245,6 @@ li::first-letter {
   transition: opacity 0.25s ease;
 }
 
-.delete-btn:hover {
-  background-color: rgba(255, 0, 0, 0.15);
-  transform: rotate(8deg);
-}
-
-.delete-btn:hover .delete-img {
-  opacity: 1;
-}
-
 /* categories container */
 
 .categories-container {
@@ -244,7 +259,7 @@ li::first-letter {
 .categories-container button {
   flex: 1;
   margin: 0 6px;
-  padding: 10px 0;
+  padding: 10px;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: rgba(255, 255, 255, 0.08);
@@ -253,7 +268,6 @@ li::first-letter {
   color: rgba(255, 255, 255, 0.75);
   font-size: 0.85rem;
   letter-spacing: 1px;
-  text-transform: uppercase;
   cursor: pointer;
   box-shadow:
     0 8px 20px rgba(0, 0, 0, 0.3),
@@ -263,13 +277,6 @@ li::first-letter {
     background 0.25s ease,
     box-shadow 0.25s ease,
     color 0.25s ease;
-}
-
-.categories-container button:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.16);
-  color: white;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
 }
 
 .categories-container button.active {
@@ -282,4 +289,33 @@ li::first-letter {
 
 .categories-container button:active {
   transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(68, 196, 161, 0.6);
+  }
+
+  .list-container:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  }
+
+  .delete-btn:hover {
+    background-color: rgba(255, 0, 0, 0.15);
+    transform: rotate(8deg);
+  }
+
+  .delete-btn:hover .delete-img {
+    opacity: 1;
+  }
+
+  .categories-container button:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.16);
+    color: white;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+  }
 }
