@@ -1,0 +1,165 @@
+body {
+  background-color: #313131;
+  width: 100vw;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("https://img.freepik.com/free-vector/dark-black-background-design-with-stripes_1017-38064.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+h1 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-template-rows: 27px 0;
+  grid-gap: 10px;
+  align-items: center;
+}
+
+h1:after,
+h1:before {
+  content: " ";
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  height: 5px;
+}
+
+.main-container {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 80%;
+  height: 500px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  max-width: 400px;
+  margin: auto;
+}
+
+input[name="taskInput"] {
+  border: 2px solid grey !important;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 100px;
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+button[type="submit"] {
+  padding: 2px 20px;
+  background-color: #44c4a1;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bolder;
+  font-size: 2rem;
+}
+
+.task-container {
+  display: none;
+  padding: 0;
+  height: 350px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.task-container::-webkit-scrollbar {
+  display: none;
+}
+
+.list-container {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  max-width: 400px;
+  margin: auto;
+  margin-bottom: 10px;
+  color: white;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.5s ease,
+    background 0.5s ease;
+}
+
+.list-container:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-3px, -3px);
+}
+
+.list {
+  flex: 1;
+}
+
+li::first-letter {
+  text-transform: capitalize;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.delete-img {
+  width: 30px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.delete-btn:hover .delete-img {
+  opacity: 1;
+}
+
+.check-box {
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.tick-image {
+  width: 20px;
+  height: 20px;
+  display: none;
+}
