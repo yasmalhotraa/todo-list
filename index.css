@@ -324,8 +324,13 @@ li::first-letter {
 
   .categories-container button:hover {
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.16);
+    background: linear-gradient(
+      270deg,
+      rgba(68, 196, 161, 0.5),
+      rgba(58, 174, 216, 0.5)
+    );
+
     color: white;
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(68, 196, 161, 0.45);
   }
 }
