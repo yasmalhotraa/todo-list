@@ -74,7 +74,7 @@ function renderTasks(taskList = tasks) {
   if (taskList.length === 0) {
     unorderedList.innerHTML = `
   <p>Small steps start here.</p>
-  <p>Add your first task and stay on track.</p>
+  <p>Add your task and stay on track.</p>
   <p>No pressure. Just progress.</p>
 `;
     unorderedList.classList.add("empty");
