@@ -35,6 +35,13 @@ buttons.forEach((btn) => {
 renderCurrentCategory();
 
 // functions
+// haptic helper function
+function haptic(pattern = 40) {
+  if ("vibrate" in navigator) {
+    navigator.vibrate(pattern);
+  }
+}
+
 // handle form submission
 function handleFormSubmission(e) {
   e.preventDefault();
@@ -49,6 +56,8 @@ function handleFormSubmission(e) {
 
 // adding new task to array
 function addTask(text) {
+  haptic([30, 20, 30]);
+
   const task = {
     id: Date.now(),
     text,
@@ -115,6 +124,7 @@ function createTaskElement(task) {
   checkbox.appendChild(tickImage);
 
   checkbox.addEventListener("click", () => {
+    haptic(40);
     task.completed = !task.completed;
     saveTasks();
     renderCurrentCategory();
@@ -125,6 +135,7 @@ function createTaskElement(task) {
   li.className = "list";
   li.textContent = task.text;
   li.addEventListener("click", () => {
+    haptic(40);
     task.completed = !task.completed;
     saveTasks();
     renderCurrentCategory();
@@ -147,6 +158,7 @@ function createTaskElement(task) {
   deleteBtn.appendChild(deleteImg);
 
   deleteBtn.addEventListener("click", () => {
+    haptic([80, 30, 80]);
     tasks = tasks.filter((t) => t.id !== task.id);
     saveTasks();
     renderCurrentCategory();
