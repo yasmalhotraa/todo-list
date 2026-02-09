@@ -35,13 +35,6 @@ buttons.forEach((btn) => {
 renderCurrentCategory();
 
 // functions
-// haptic helper function
-function haptic(pattern = 40) {
-  if ("vibrate" in navigator) {
-    navigator.vibrate(pattern);
-  }
-}
-
 // handle form submission
 function handleFormSubmission(e) {
   e.preventDefault();
@@ -56,8 +49,6 @@ function handleFormSubmission(e) {
 
 // adding new task to array
 function addTask(text) {
-  haptic([30, 20, 30]);
-
   const task = {
     id: Date.now(),
     text,
@@ -75,7 +66,6 @@ function saveTasks() {
 }
 
 // render all tasks
-
 function renderTasks(taskList = tasks) {
   unorderedList.innerHTML = "";
   unorderedList.classList.remove("empty");
@@ -112,7 +102,7 @@ function createTaskElement(task) {
   listContainer.className = "list-container";
   listContainer.style.opacity = task.completed ? "0.5" : "1";
 
-  // checkbox
+  // #region checkbox
   const checkbox = document.createElement("div");
   checkbox.className = "check-box";
 
@@ -124,48 +114,60 @@ function createTaskElement(task) {
   checkbox.appendChild(tickImage);
 
   checkbox.addEventListener("click", () => {
-    haptic(40);
     task.completed = !task.completed;
     saveTasks();
     renderCurrentCategory();
   });
+  // #endregion
 
-  // task text
+  // #region task text
   const li = document.createElement("li");
   li.className = "list";
   li.textContent = task.text;
   li.addEventListener("click", () => {
-    haptic(40);
     task.completed = !task.completed;
     saveTasks();
     renderCurrentCategory();
   });
+  // #endregion
 
   if (task.completed) {
     li.classList.add("completed");
     li.style.textDecoration = "line-through";
   }
 
-  // delete button
+  // #region edit button
+  const editBtn = document.createElement("button");
+  editBtn.className = "edit-btn";
+  const pencilImg = document.createElement("img");
+  pencilImg.className = "pencil-img";
+  pencilImg.src = "https://img.icons8.com/m_sharp/512/FFFFFF/edit.png";
+  editBtn.appendChild(pencilImg);
+
+  editBtn.addEventListener("click", () => {
+    editTask(task, listContainer);
+  });
+
+  // #endregion
+
+  // #region delete button
   const deleteBtn = document.createElement("button");
   deleteBtn.className = "delete-btn";
-
   const deleteImg = document.createElement("img");
   deleteImg.src =
     "https://uxwing.com/wp-content/themes/uxwing/download/checkmark-cross/delete-cross-round-white-icon.png";
   deleteImg.className = "delete-img";
-
   deleteBtn.appendChild(deleteImg);
-
   deleteBtn.addEventListener("click", () => {
-    haptic([80, 30, 80]);
     tasks = tasks.filter((t) => t.id !== task.id);
     saveTasks();
     renderCurrentCategory();
   });
+  // #endregion
 
   listContainer.appendChild(checkbox);
   listContainer.appendChild(li);
+  listContainer.appendChild(editBtn);
   listContainer.appendChild(deleteBtn);
 
   unorderedList.appendChild(listContainer);
@@ -179,4 +181,54 @@ function getCompleted() {
 // function to get non completed tasks from the tasks array
 function getActive() {
   return tasks.filter((task) => !task.completed);
+}
+
+// function to edit the task
+function editTask(task, listContainer) {
+  listContainer.innerHTML = "";
+
+  // edit input
+  const input = document.createElement("input");
+
+  input.type = "text";
+  input.value = task.text;
+  input.id = "editInput";
+  input.className = "edit-input";
+
+  // save button
+  const saveBtn = document.createElement("button");
+  saveBtn.className = "save-btn";
+  saveBtn.textContent = "✔";
+
+  // cancel button
+  const cancelBtn = document.createElement("button");
+  cancelBtn.className = "cancel-btn";
+  cancelBtn.textContent = "✖";
+
+  // save action
+  saveBtn.addEventListener("click", () => {
+    const newValue = input.value.trim();
+    if (!newValue) return;
+
+    task.text = newValue;
+    saveTasks();
+    renderCurrentCategory();
+  });
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      saveBtn.click();
+    }
+  });
+
+  // cancel action
+  cancelBtn.addEventListener("click", () => {
+    renderCurrentCategory(); // rebuilding old UI
+  });
+
+  listContainer.appendChild(input);
+  listContainer.appendChild(saveBtn);
+  listContainer.appendChild(cancelBtn);
+
+  input.focus();
 }

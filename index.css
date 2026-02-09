@@ -186,6 +186,7 @@ button[type="submit"] {
   align-items: center;
   padding: 6px 12px;
   max-width: 400px;
+  height: 36px;
   margin: auto;
   margin-bottom: 12px;
   gap: 12px;
@@ -301,6 +302,92 @@ li::first-letter {
   transform: scale(0.97);
 }
 
+/* Edit task button */
+.edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
+  color: white;
+  opacity: 0.7;
+  transition: opacity 0.25s ease;
+}
+
+.pencil-img {
+  width: 20px;
+  pointer-events: none;
+}
+
+/* Edit Input */
+.edit-input {
+  flex: 1;
+  height: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  transition:
+    border 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.edit-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.edit-input:focus {
+  border: 1px solid #44c4a1 !important;
+  box-shadow: 0 0 0 2px rgba(68, 196, 161, 0.25);
+}
+
+.save-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
+  color: white;
+  font-size: 22px;
+  opacity: 0.7;
+  transition: opacity 0.25s ease;
+}
+
+.cancel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
+  color: white;
+  font-size: 22px;
+  opacity: 0.7;
+  transition: opacity 0.25s ease;
+}
+
 @media (hover: hover) and (pointer: fine) {
   button[type="submit"]:hover {
     transform: translateY(-2px);
@@ -313,6 +400,7 @@ li::first-letter {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
   }
 
+  /* delete btn */
   .delete-btn:hover {
     background-color: rgba(255, 0, 0, 0.15);
     transform: rotate(8deg);
@@ -322,6 +410,7 @@ li::first-letter {
     opacity: 1;
   }
 
+  /* categories container */
   .categories-container button:hover {
     transform: translateY(-2px);
     background: linear-gradient(
@@ -332,5 +421,28 @@ li::first-letter {
 
     color: white;
     box-shadow: 0 10px 30px rgba(68, 196, 161, 0.45);
+  }
+
+  /* edit btn */
+  .edit-btn:hover {
+    background-color: rgba(255, 193, 7, 0.15);
+    transform: rotate(-8deg);
+  }
+  .edit-btn:hover .pencil-img {
+    opacity: 1;
+  }
+
+  /* save btn */
+  .save-btn:hover {
+    background-color: rgba(68, 196, 161, 0.15);
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  /* cancel btn */
+  .cancel-btn:hover {
+    background-color: rgba(255, 87, 87, 0.15);
+    transform: rotate(8deg);
+    opacity: 1;
   }
 }
