@@ -141,7 +141,7 @@ function createTaskElement(task) {
   editBtn.className = "edit-btn";
   const pencilImg = document.createElement("img");
   pencilImg.className = "pencil-img";
-  pencilImg.src = "https://img.icons8.com/m_sharp/512/FFFFFF/edit.png";
+  pencilImg.src = "https://www.svgrepo.com/show/42233/pencil-edit-button.svg";
   editBtn.appendChild(pencilImg);
 
   editBtn.addEventListener("click", () => {

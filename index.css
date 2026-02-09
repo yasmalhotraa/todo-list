@@ -38,7 +38,6 @@ h1 {
   text-align: center;
   font-size: 30px;
   font-weight: 300;
-  /* font-family: "Playwrite NZ Basic Guides", cursive; */
   font-family: "Anton", sans-serif;
   color: rgba(255, 255, 255, 0.75);
   letter-spacing: 3px;
@@ -318,12 +317,15 @@ li::first-letter {
     transform 0.25s ease;
   color: white;
   opacity: 0.7;
-  transition: opacity 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.5s ease;
 }
 
 .pencil-img {
   width: 20px;
   pointer-events: none;
+  filter: invert(1);
 }
 
 /* Edit Input */
@@ -366,7 +368,9 @@ li::first-letter {
   color: white;
   font-size: 22px;
   opacity: 0.7;
-  transition: opacity 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.5s ease;
 }
 
 .cancel-btn {
@@ -385,7 +389,9 @@ li::first-letter {
   color: white;
   font-size: 22px;
   opacity: 0.7;
-  transition: opacity 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.5s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -426,7 +432,7 @@ li::first-letter {
   /* edit btn */
   .edit-btn:hover {
     background-color: rgba(255, 193, 7, 0.15);
-    transform: rotate(-8deg);
+    transform: rotate(45deg);
   }
   .edit-btn:hover .pencil-img {
     opacity: 1;
@@ -435,7 +441,7 @@ li::first-letter {
   /* save btn */
   .save-btn:hover {
     background-color: rgba(68, 196, 161, 0.15);
-    transform: scale(1.1);
+    transform: rotate(15deg);
     opacity: 1;
   }
 
