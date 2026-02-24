@@ -394,6 +394,11 @@ li::first-letter {
     transform 0.1s ease;
 }
 
+.dragging {
+  opacity: 0.5;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 @media (hover: hover) and (pointer: fine) {
   button[type="submit"]:hover {
     transform: translateY(-2px);
@@ -408,7 +413,7 @@ li::first-letter {
 
   /* delete btn */
   .delete-btn:hover {
-    background-color: rgba(255, 0, 0, 0.15);
+    background-color: rgba(255, 0, 0, 0.25);
     transform: rotate(8deg);
   }
 
@@ -424,14 +429,13 @@ li::first-letter {
       rgba(68, 196, 161, 0.5),
       rgba(58, 174, 216, 0.5)
     );
-
     color: white;
     box-shadow: 0 10px 30px rgba(68, 196, 161, 0.45);
   }
 
   /* edit btn */
   .edit-btn:hover {
-    background-color: rgba(255, 193, 7, 0.15);
+    background-color: rgba(255, 193, 7, 0.25);
     transform: rotate(45deg);
   }
   .edit-btn:hover .pencil-img {
@@ -440,14 +444,14 @@ li::first-letter {
 
   /* save btn */
   .save-btn:hover {
-    background-color: rgba(68, 196, 161, 0.15);
+    background-color: rgba(68, 196, 161, 0.25);
     transform: rotate(15deg);
     opacity: 1;
   }
 
   /* cancel btn */
   .cancel-btn:hover {
-    background-color: rgba(255, 87, 87, 0.15);
+    background-color: rgba(255, 0, 0, 0.25);
     transform: rotate(8deg);
     opacity: 1;
   }

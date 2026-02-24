@@ -4,6 +4,7 @@ const unorderedList = document.querySelector(".task-container");
 const buttons = document.querySelectorAll(".categories-container button");
 const allBtn = document.querySelector("#allBtn");
 let currentCategory = "all";
+let draggedElement = null;
 
 // load tasks from localStorage or initialize empty array
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -33,6 +34,22 @@ buttons.forEach((btn) => {
 
 // render on page load
 renderCurrentCategory();
+
+// drag events
+unorderedList.addEventListener("dragover", (e) => {
+  e.preventDefault();
+
+  const afterElement = getDragAfterElement(unorderedList, e.clientY);
+  if (afterElement == null) {
+    unorderedList.appendChild(draggedElement);
+  } else {
+    unorderedList.insertBefore(draggedElement, afterElement);
+  }
+});
+
+unorderedList.addEventListener("drop", () => {
+  updateTaskOrder();
+});
 
 // functions
 // handle form submission
@@ -101,6 +118,17 @@ function createTaskElement(task) {
   const listContainer = document.createElement("div");
   listContainer.className = "list-container";
   listContainer.style.opacity = task.completed ? "0.5" : "1";
+  listContainer.draggable = true;
+  listContainer.dataset.id = task.id;
+
+  listContainer.addEventListener("dragstart", () => {
+    draggedElement = listContainer;
+    listContainer.classList.add("dragging");
+  });
+
+  listContainer.addEventListener("dragend", () => {
+    listContainer.classList.remove("dragging");
+  });
 
   // #region checkbox
   const checkbox = document.createElement("div");
@@ -231,4 +259,38 @@ function editTask(task, listContainer) {
   listContainer.appendChild(cancelBtn);
 
   input.focus();
+}
+
+// helper function to find drop position
+function getDragAfterElement(container, y) {
+  const draggableElements = [
+    ...container.querySelectorAll(".list-container:not(.dragging)"),
+  ];
+
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY },
+  ).element;
+}
+
+// update task order after drop
+function updateTaskOrder() {
+  const newOrder = [...unorderedList.querySelectorAll(".list-container")].map(
+    (container) => {
+      const id = Number(container.dataset.id);
+      return tasks.find((task) => task.id === id);
+    },
+  );
+
+  tasks = newOrder;
+  saveTasks();
 }
